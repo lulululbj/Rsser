@@ -1,0 +1,2 @@
+include ':app', ':mvvmcore', ':ktx'
+rootProject.name='Rsser'
