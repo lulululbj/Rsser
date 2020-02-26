@@ -51,6 +51,10 @@ dependencies {
     api 'com.squareup.retrofit2:converter-jaxb:2.7.1'
     api 'com.squareup.okhttp3:logging-interceptor:4.0.0'
 
+    api "androidx.room:room-runtime:$rootProject.roomVersion"
+    api "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+
     implementation project(path: ':ktx')
 
 }
