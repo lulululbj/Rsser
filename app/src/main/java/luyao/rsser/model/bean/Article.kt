@@ -7,9 +7,9 @@ import androidx.room.*
     foreignKeys = [ForeignKey(
         entity = Rss::class,
         parentColumns = ["id"],
-        childColumns = ["rssId"]
+        childColumns = ["rss_id"]
     )],
-    indices = [Index("rssId")]
+    indices = [Index("rss_id")]
 )
 data class Article(
     @ColumnInfo(name = "rss_id")

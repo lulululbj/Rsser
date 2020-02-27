@@ -11,6 +11,6 @@ data class RssArticle(
     @Embedded
     val rss:Rss,
 
-    @Relation(parentColumn = "id",entityColumn = "rssId")
+    @Relation(parentColumn = "id",entityColumn = "rss_id")
     val articleList : List<Article> = emptyList()
 )

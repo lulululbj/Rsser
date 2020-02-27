@@ -1,10 +1,7 @@
 package luyao.rsser.model.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import luyao.rsser.model.bean.Article
 
 /**
@@ -19,4 +16,7 @@ interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addArticles(articles: List<Article>)
+
+    @Delete
+    suspend fun deleteArticles(articles: List<Article>)
 }

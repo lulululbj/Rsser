@@ -2,6 +2,9 @@ package luyao.rsser.util
 
 import luyao.rsser.model.bean.Article
 import luyao.rsser.model.bean.Rss
+import luyao.rsser.model.bean.RssArticle
+import luyao.util.ktx.ext.Hash
+import luyao.util.ktx.ext.hash
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.StringReader
@@ -17,7 +20,7 @@ object RssUtil {
     /**
      * 解析 xml 字符串
      */
-    fun readFeed(xmlString: String): Rss? {
+    fun readFeed(xmlString: String): RssArticle? {
         val xmlParserFactory = XmlPullParserFactory.newInstance()
         val parser = xmlParserFactory.newPullParser()
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
@@ -26,7 +29,7 @@ object RssUtil {
         return readRss(parser)
     }
 
-    private fun readRss(parser: XmlPullParser): Rss? {
+    private fun readRss(parser: XmlPullParser): RssArticle? {
         parser.require(XmlPullParser.START_TAG, ns, "rss")
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG)
@@ -40,7 +43,7 @@ object RssUtil {
         return null
     }
 
-    private fun readChannel(parser: XmlPullParser): Rss {
+    private fun readChannel(parser: XmlPullParser): RssArticle {
 
         var title = ""
         var link = ""
@@ -62,7 +65,9 @@ object RssUtil {
             }
         }
 
-        return Rss(link, title, link, description, language, articleList)
+        val rss = Rss(link.hash(Hash.SHA1),link,title,description,language)
+
+        return RssArticle(rss, articleList)
     }
 
     // 这里的 link 是 rss 订阅地址
@@ -84,7 +89,7 @@ object RssUtil {
                 else -> skip(parser)
             }
         }
-        return Article(link, articleTitle, articleLink, articleContent, articlePubDate)
+        return Article(link.hash(Hash.SHA1), articleTitle, articleLink, articleContent, articlePubDate)
     }
 
     private fun readTitle(parser: XmlPullParser): String {

@@ -1,11 +1,13 @@
 package luyao.rsser.main
 
 import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import luyao.mvvm.core.base.BaseVMActivity
 import luyao.rsser.R
 import luyao.rsser.model.OkHttpClient
 import luyao.rsser.util.RssUtil
+import luyao.rsser.vm.RssViewModel
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -13,11 +15,11 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class MainActivity : BaseVMActivity<MainViewModel>(false) {
+class MainActivity : BaseVMActivity<RssViewModel>(false) {
 
     override fun getLayoutResId(): Int = R.layout.activity_main
 
-    override fun initVM(): MainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+    override fun initVM(): RssViewModel = ViewModelProvider(this).get(RssViewModel::class.java)
 
     override fun initView() {
 
@@ -35,13 +37,20 @@ class MainActivity : BaseVMActivity<MainViewModel>(false) {
             override fun onResponse(call: Call, response: Response) {
                 val result = response.body?.string()
 //                parseXml(result ?: "")
-                val rss = RssUtil.readFeed(result ?: "")
-                Log.e("xxx", rss.toString())
+                val rssArticle = RssUtil.readFeed(result ?: "")
+                Log.e("xxx", rssArticle.toString())
+
+                rssArticle?.let { mViewModel.addRss(it) }
             }
         })
     }
 
     override fun startObserve() {
+        mViewModel.rssList.observe(this, Observer {
+            it.forEach { rssArticle ->
+                Log.e("rss",rssArticle.rss.title)
+            }
+        })
     }
 
 
