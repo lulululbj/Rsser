@@ -11,8 +11,8 @@ import luyao.rsser.model.bean.Article
 @Dao
 interface ArticleDao {
 
-    @Query("SELECT * FROM article WHERE rss_id = :rssId")
-    suspend fun getArticlesByRss(rssId: String): LiveData<List<Article>>
+//    @Query("SELECT * FROM article WHERE rss_id = :rssId")
+//    suspend fun getArticlesByRss(rssId: String): LiveData<List<Article>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addArticles(articles: List<Article>)

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
  * Created by luyao
  * on 2019/12/27 9:39
  */
-abstract class BaseVMFragment<VM:BaseViewModel>(useDataBinding: Boolean = true) : Fragment(){
+abstract class BaseVMFragment<VM : BaseViewModel>(useDataBinding: Boolean = true) : Fragment() {
 
     private val _useBinding = useDataBinding
     protected lateinit var mBinding: ViewDataBinding
@@ -28,6 +28,7 @@ abstract class BaseVMFragment<VM:BaseViewModel>(useDataBinding: Boolean = true) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mViewModel = initVM()
+        if (_useBinding) mBinding.lifecycleOwner = this
         initView()
         initData()
         startObserve()
@@ -35,7 +36,7 @@ abstract class BaseVMFragment<VM:BaseViewModel>(useDataBinding: Boolean = true) 
     }
 
     abstract fun getLayoutResId(): Int
-    abstract fun initVM():VM
+    abstract fun initVM(): VM
     abstract fun initView()
     abstract fun initData()
     abstract fun startObserve()

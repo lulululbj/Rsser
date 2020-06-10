@@ -1,2 +1,2 @@
-include ':app', ':mvvmcore', ':ktx'
+include ':app', ':mvvmcore'
 rootProject.name='Rsser'

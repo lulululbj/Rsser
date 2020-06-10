@@ -24,7 +24,7 @@ interface RssDao {
     suspend fun removeRss(rss: Rss)
 
     @Transaction
-    @Query("SELECT * FROM article WHERE rss_id IN (SELECT id FROM rss)")
+    @Query("SELECT * FROM rss WHERE id IN (SELECT rss_id FROM article)")
     fun getRssArticle(): LiveData<List<RssArticle>>
 
 }

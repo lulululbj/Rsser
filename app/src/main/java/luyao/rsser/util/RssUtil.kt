@@ -3,8 +3,6 @@ package luyao.rsser.util
 import luyao.rsser.model.bean.Article
 import luyao.rsser.model.bean.Rss
 import luyao.rsser.model.bean.RssArticle
-import luyao.util.ktx.ext.Hash
-import luyao.util.ktx.ext.hash
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.StringReader
