@@ -4,4 +4,8 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="rsser">Rsser</string>
+    <string name="add">添加</string>
+    <string name="please_input_url">请输入 URL</string>
+    <string name="cancel">取消</string>
+    <string name="add_rss">添加 Rss</string>
 </resources>

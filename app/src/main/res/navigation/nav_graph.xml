@@ -9,5 +9,16 @@
         android:id="@+id/mainFragment"
         android:name="luyao.rsser.ui.MainFragment"
         android:label="Main"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_main_to_add_rss"
+            app:destination="@id/addRssFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/addRssFragment"
+        android:name="luyao.rsser.ui.AddRssFragment"
+        android:label="AddRss"
+        tools:layout="@layout/fragment_add_rss"/>
 </navigation>

@@ -1,6 +1,7 @@
 package luyao.rsser.main
 
 import android.util.Log
+import androidx.navigation.Navigation.findNavController
 import luyao.mvvm.core.base.BaseActivity
 import luyao.rsser.R
 import luyao.rsser.model.OkHttpClient
@@ -22,20 +23,23 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-        val okHttp = OkHttpClient()
-        val call =
-            okHttp.client.newCall(Request.Builder().url("https://www.zhihu.com/rss").build())
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("xxx", e.message ?: "")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val result = response.body?.string()
-                val rssArticle = RssUtil.readFeed(result ?: "")
-                Log.e("xxx", rssArticle.toString())
-
-            }
-        })
+//        val okHttp = OkHttpClient()
+//        val call =
+//            okHttp.client.newCall(Request.Builder().url("https://www.zhihu.com/rss").build())
+//        call.enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//                Log.e("xxx", e.message ?: "")
+//            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//                val result = response.body?.string()
+//                val rssArticle = RssUtil.readFeed(result ?: "")
+//                Log.e("xxx", rssArticle.toString())
+//
+//            }
+//        })
     }
+
+    override fun onSupportNavigateUp() =
+        findNavController(this, R.id.nav_host_fragment).navigateUp()
 }
