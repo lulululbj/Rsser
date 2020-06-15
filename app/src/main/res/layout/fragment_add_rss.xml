@@ -3,36 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-<variable
-    name="title"
-    type="luyao.rsser.model.bean.Title" />
+
+        <variable
+            name="title"
+            type="luyao.rsser.model.bean.Title" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/title_layout"
-            title="@{title}"/>
+        <include
+            layout="@layout/title_layout"
+            title="@{title}" />
 
-        <com.google.android.material.textfield.TextInputLayout
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/urlInput"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:errorEnabled="true"
-            app:errorTextAppearance="@style/Error_Text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:hint="@string/please_input_url"
-            android:background="@null">
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="12dp"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/urlInput" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
