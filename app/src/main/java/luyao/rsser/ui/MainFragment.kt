@@ -3,7 +3,6 @@ package luyao.rsser.ui
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import luyao.mvvm.core.base.BaseVMFragment
-import luyao.rsser.BR
 import luyao.rsser.R
 import luyao.rsser.databinding.FragmentMainBinding
 import luyao.rsser.model.bean.Title
@@ -20,9 +19,7 @@ class MainFragment : BaseVMFragment() {
     override fun getLayoutResId() = R.layout.fragment_main
 
     override fun initView() {
-        mBinding.run {
-            setVariable(BR.title, Title(R.string.rsser, R.drawable.ic_menu) { })
-        }
+        (mBinding as FragmentMainBinding).setTitle(Title(R.string.rsser, R.drawable.ic_menu) { })
         initMenu()
     }
 

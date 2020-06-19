@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
 
     <data>
-
+<!--        <variable-->
+<!--            name="title"-->
+<!--            type="luyao.rsser.model.bean.Title" />-->
         <variable
-            name="title"
-            type="luyao.rsser.model.bean.Title" />
+            name="viewModel"
+            type="luyao.rsser.vm.AddRssViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            layout="@layout/title_layout"
-            title="@{title}" />
+<!--        <include-->
+<!--            android:id="@+id/title"-->
+<!--            layout="@layout/title_layout"/>-->
 
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/urlInput"
+            binding:afterTextChanged="@{viewModel.checkInput}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:hint="@string/please_input_url"
+            android:text="@={viewModel.inputUrl}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rssNext"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="12dp"
-            android:enabled="false"
+            android:background="@drawable/next_background"
+            android:enabled="@={viewModel.enabled}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/urlInput" />
