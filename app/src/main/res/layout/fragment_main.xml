@@ -14,7 +14,8 @@
 
         <include
             android:id="@+id/title"
-            layout="@layout/title_layout" />
+            layout="@layout/title_layout"
+            title="@{title}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

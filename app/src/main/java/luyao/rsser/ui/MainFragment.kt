@@ -7,6 +7,7 @@ import luyao.rsser.R
 import luyao.rsser.databinding.FragmentMainBinding
 import luyao.rsser.model.bean.Title
 import luyao.rsser.vm.RssViewModel
+import luyao.rsser.BR
 
 /**
  * Created by luyao
@@ -19,7 +20,7 @@ class MainFragment : BaseVMFragment() {
     override fun getLayoutResId() = R.layout.fragment_main
 
     override fun initView() {
-        (mBinding as FragmentMainBinding).setTitle(Title(R.string.rsser, R.drawable.ic_menu) { })
+        mBinding.setVariable(BR.title,Title(R.string.rsser,R.drawable.arrow_back) {onBackPressed()})
         initMenu()
     }
 

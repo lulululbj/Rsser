@@ -11,3 +11,8 @@ import java.util.regex.Pattern
 const val URL_PATTERN = "http(s)?://[^\\s]*"
 
 fun String.isUrl() = Pattern.matches(URL_PATTERN,this)
+
+fun main() {
+    val url = "https://www.baidu.com"
+    println(url.isUrl())
+}

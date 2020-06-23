@@ -4,9 +4,9 @@
     xmlns:binding="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="title"-->
-<!--            type="luyao.rsser.model.bean.Title" />-->
+        <variable
+            name="title"
+            type="luyao.rsser.model.bean.Title" />
         <variable
             name="viewModel"
             type="luyao.rsser.vm.AddRssViewModel" />
@@ -16,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <include-->
-<!--            android:id="@+id/title"-->
-<!--            layout="@layout/title_layout"/>-->
-
+        <include
+            android:id="@+id/title"
+            layout="@layout/title_layout"
+            title="@{title}"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/urlInput"
-            binding:afterTextChanged="@{viewModel.checkInput}"
+            binding:onTextChanged="@{viewModel.checkInput}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -42,7 +42,7 @@
             android:layout_height="38dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/next_background"
-            android:enabled="@={viewModel.enabled}"
+            app:enabled="@{viewModel.enabled}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/urlInput" />
