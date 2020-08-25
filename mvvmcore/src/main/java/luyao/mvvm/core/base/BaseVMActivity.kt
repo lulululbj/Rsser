@@ -6,24 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-/**
- * Created by luyao
- * on 2019/12/18 14:46
- */
 abstract class BaseVMActivity : AppCompatActivity() {
 
+    protected inline fun <reified T : ViewDataBinding> binding(
+            @LayoutRes resId: Int
+    ): Lazy<T> = lazy { DataBindingUtil.setContentView<T>(this, resId).apply {
+        lifecycleOwner = this@BaseVMActivity
+    } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startObserve()
         initView()
         initData()
     }
 
-    protected inline fun <reified T : ViewDataBinding> binding(
-        @LayoutRes resId: Int
-    ): Lazy<T> = lazy { DataBindingUtil.setContentView<T>(this, resId) }
-
     abstract fun initView()
     abstract fun initData()
-
+    abstract fun startObserve()
 }

@@ -4,42 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 
 /**
  * Created by luyao
  * on 2019/12/27 9:39
  */
-abstract class BaseVMFragment : Fragment() {
+abstract class BaseVMFragment<T:ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment(layoutId) {
 
-    protected lateinit var mBinding: ViewDataBinding
+    lateinit var binding:T
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false)
-        return mBinding.root
+    protected  fun < T : ViewDataBinding> binding(
+            inflater: LayoutInflater,
+            @LayoutRes layoutId: Int,
+            container: ViewGroup?
+    ): T =   DataBindingUtil.inflate<T>(inflater,layoutId, container,false).apply {
+        lifecycleOwner = this@BaseVMFragment
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = binding(inflater,layoutId,container)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mBinding.lifecycleOwner = this
+        binding.lifecycleOwner = this
+        startObserve()
         initView()
         initData()
-        startObserve()
         super.onViewCreated(view, savedInstanceState)
     }
 
-    abstract fun getLayoutResId(): Int
     abstract fun initView()
     abstract fun initData()
     abstract fun startObserve()
-
-    protected fun onBackPressed(){
-        findNavController().navigateUp()
-    }
 }
